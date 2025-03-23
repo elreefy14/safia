@@ -6,7 +6,6 @@ import 'package:safiaa/core/helpers/spacing.dart';
 import 'package:safiaa/core/recourses/color_manager/color_manager.dart';
 import 'package:safiaa/core/recourses/routes_manger/const.dart';
 import 'package:safiaa/core/recourses/styles_manger/styles_manager.dart';
-import 'package:safiaa/core/widgets/custom_app_bar.dart';
 import 'package:safiaa/features/auth/presentation/pages/terms_and_conditon.dart';
 import 'package:safiaa/features/profile/data/models/profile_model.dart';
 import 'package:safiaa/features/profile/presentation/cubits/cubit/profile_cubit.dart';
@@ -48,10 +47,8 @@ class ProfileViewBody extends StatelessWidget {
               child: const CircleAvatar(
                 radius: 50,
                 backgroundColor: Colors.white,
-                child: Icon(Icons.person_outline, 
-                  size: 50, 
-                  color: Colors.black54
-                ),
+                child:
+                    Icon(Icons.person_outline, size: 50, color: Colors.black54),
               ),
             ),
             const SizedBox(height: 16),
@@ -84,7 +81,16 @@ class ProfileViewBody extends StatelessWidget {
       child: SafeArea(
         child: Column(
           children: [
-            // Profile Header
+            verticalSpace(15),
+            Center(
+                child: Text(
+              'الملف الشخصي',
+              style: getBoldStyle(
+                color: MyColors.black,
+                fontSize: 20.sp,
+              ),
+            )),
+            verticalSpace(12), // Profile Header
             Container(
               padding: EdgeInsets.all(20.h),
               child: Column(
@@ -107,7 +113,7 @@ class ProfileViewBody extends StatelessWidget {
                           ),
                         ),
                       ),
-                      ],
+                    ],
                   ),
                   SizedBox(height: 16.h),
                   Text(
@@ -136,7 +142,7 @@ class ProfileViewBody extends StatelessWidget {
                 ],
               ),
             ),
-            
+
             // Profile Options
             Expanded(
               child: Container(
@@ -163,7 +169,8 @@ class ProfileViewBody extends StatelessWidget {
                       title: 'الشروط والاحكام',
                       onTap: () => Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (_) => const TermsAndCondition()),
+                        MaterialPageRoute(
+                            builder: (_) => const TermsAndCondition()),
                       ),
                     ),
                     ProfileButton(
@@ -176,7 +183,6 @@ class ProfileViewBody extends StatelessWidget {
                       title: 'الطلبات الخاصة بي',
                       onTap: () => Navigator.pushNamed(context, allOrders),
                     ),
-
                     ProfileButton(
                       icon: Icons.logout,
                       title: 'تسجيل الخروج',
@@ -238,7 +244,8 @@ class ProfileViewBody extends StatelessWidget {
                     Shareds.clear();
                     Navigator.pushReplacementNamed(context, login);
                   },
-                  child: Text('تسجيل الخروج', style: getBoldStyle(fontSize: 16.sp)),
+                  child: Text('تسجيل الخروج',
+                      style: getBoldStyle(fontSize: 16.sp)),
                 ),
               ),
             ],
@@ -288,7 +295,8 @@ class ProfileViewBody extends StatelessWidget {
                     Shareds.clear();
                     Navigator.pushReplacementNamed(context, login);
                   },
-                  child: Text('حذف الحساب', style: getBoldStyle(fontSize: 16.sp)),
+                  child:
+                      Text('حذف الحساب', style: getBoldStyle(fontSize: 16.sp)),
                 ),
               ),
             ],
@@ -340,7 +348,9 @@ class ProfileButton extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.all(10.w),
                   decoration: BoxDecoration(
-                    color: isDestructive ? Colors.red.withOpacity(0.1) : MyColors.blue50,
+                    color: isDestructive
+                        ? Colors.red.withOpacity(0.1)
+                        : MyColors.blue50,
                     borderRadius: BorderRadius.circular(12.r),
                   ),
                   child: Icon(

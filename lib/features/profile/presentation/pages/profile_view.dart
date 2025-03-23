@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:safiaa/core/helpers/guest_user_mixin.dart';
 import 'package:safiaa/core/helpers/injection_container.dart' as di;
 import 'package:safiaa/core/helpers/spacing.dart';
-import 'package:safiaa/features/profile/domain/repositories/profile_repo.dart';
-import 'package:safiaa/features/profile/presentation/widgets/profile_view_body.dart';
-import 'package:safiaa/core/helpers/guest_user_mixin.dart';
 import 'package:safiaa/core/recourses/color_manager/color_manager.dart';
 import 'package:safiaa/core/recourses/styles_manger/styles_manager.dart';
+import 'package:safiaa/core/widgets/custom_app_bar.dart';
+import 'package:safiaa/features/profile/domain/repositories/profile_repo.dart';
+import 'package:safiaa/features/profile/presentation/widgets/profile_view_body.dart';
 
-import '../../../../core/recourses/routes_manger/const.dart';
-import '../../../auth/presentation/cubit/auth_cubit.dart';
 import '../cubits/cubit/profile_cubit.dart';
 
 class ProfileView extends StatelessWidget with GuestUserMixin {
@@ -20,20 +19,13 @@ class ProfileView extends StatelessWidget with GuestUserMixin {
   Widget build(BuildContext context) {
     if (isGuestUser()) {
       return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'الملف الشخصي',
-            style: getBoldStyle(
-              color: MyColors.black,
-              fontSize: 18.sp,
-            ),
-          ),
-          centerTitle: true,
-        ),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              verticalSpace(20),
+              CustomAppBar(title: 'الملف الشخصي'),
+              verticalSpace(20),
               Icon(
                 Icons.account_circle_outlined,
                 size: 80.sp,
@@ -100,9 +92,6 @@ class ProfileView extends StatelessWidget with GuestUserMixin {
 
           if (profileState is ProfileLoaded) {
             return Scaffold(
-              appBar: AppBar(
-                title: const Text('الملف الشخصي'),
-              ),
               body: ProfileViewBody(
                 profileModel: profileState.profileModel,
               ),

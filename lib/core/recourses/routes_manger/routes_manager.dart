@@ -16,6 +16,7 @@ import 'package:safiaa/features/products/data/models/categories.dart';
 import 'package:safiaa/features/products/presentation/pages/products_view.dart';
 import 'package:safiaa/features/products/presentation/widgets/product_details.dart';
 import 'package:safiaa/features/profile/presentation/pages/all_orders_view.dart';
+import 'package:safiaa/features/profile/presentation/pages/contact_us_view.dart';
 import 'package:safiaa/features/profile/presentation/widgets/orders_detials.dart';
 import 'package:safiaa/features/splash/presentation/pages/splash_view.dart';
 
@@ -36,6 +37,11 @@ Route? generateRoute(RouteSettings settings) {
     case singUp:
       return MaterialPageRoute(
         builder: (_) => const SigupView(),
+      );
+      //contact us
+    case contactUs:
+      return MaterialPageRoute(
+        builder: (_) => const ContactUsPage(),
       );
 
     case termAndCond:

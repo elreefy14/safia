@@ -39,10 +39,15 @@ class _AddOrderViewBodyState extends State<AddOrderViewBody> {
               child: Column(
                 children: [
                   Text(
-                    'من فضلك قم بادخال بياناتك الصحيحة لضمان وصول الطلب بأمان وسرعة',
-                    style: getRegularStyle(
-                        color: MyColors.grayscale600, fontSize: 16.sp),
+                    'تأكد من أن عنوانك داخل المدينة المنورة  لضمان وصول الطلب',
+                    style: getRegularStyle(color: Colors.red, fontSize: 16.sp),
+                    textAlign: TextAlign.center,
                   ),
+                  // Text(
+                  //   'من فضلك قم بادخال بياناتك الصحيحة لضمان وصول الطلب بأمان وسرعة',
+                  //   style: getRegularStyle(
+                  //       color: MyColors.grayscale600, fontSize: 16.sp),
+                  // ),
                   verticalSpace(24),
                   CustomTextFormField(
                     hintText: "المدينة",

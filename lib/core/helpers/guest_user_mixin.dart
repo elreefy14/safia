@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:safiaa/core/helpers/shred.dart';
-import 'package:safiaa/core/recourses/routes_manger/const.dart';
 import 'package:safiaa/core/recourses/color_manager/color_manager.dart';
+import 'package:safiaa/core/recourses/routes_manger/const.dart';
+import 'package:safiaa/core/recourses/styles_manger/styles_manager.dart';
 
 mixin GuestUserMixin {
   bool isGuestUser() {
     // Check if user is in guest mode AND doesn't have a valid token
-    return Shareds.getBool('isGuestUser') && Shareds.getString(prefsKeyToken).isEmpty;
+    return Shareds.getBool('isGuestUser') &&
+        Shareds.getString(prefsKeyToken).isEmpty;
   }
 
-  void handleGuestAction(BuildContext context, {
+  void handleGuestAction(
+    BuildContext context, {
     required VoidCallback action,
     String message = 'يجب تسجيل الدخول للقيام بهذا الإجراء',
   }) {
@@ -21,15 +25,19 @@ mixin GuestUserMixin {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),
             ),
-            title: const Text('تنبيه'),
-            content: Text(message),
+            title: Text('تنبيه',
+                style: getBoldStyle(color: MyColors.blue500, fontSize: 18.sp)),
+            content: Text(
+              message,
+              style:
+                  getBoldStyle(color: MyColors.grayscale600, fontSize: 16.sp),
+            ),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: Text(
-                  'إلغاء',
-                  style: TextStyle(color: MyColors.grayscale600),
-                ),
+                child: Text('إلغاء',
+                    style:
+                        getExtraBoldStyle(color: Colors.red, fontSize: 16.sp)),
               ),
               TextButton(
                 onPressed: () {
@@ -38,7 +46,8 @@ mixin GuestUserMixin {
                 },
                 child: Text(
                   'تسجيل الدخول',
-                  style: TextStyle(color: MyColors.blue500),
+                  style: getExtraBoldStyle(
+                      color: MyColors.blue500, fontSize: 16.sp),
                 ),
               ),
             ],
@@ -53,4 +62,4 @@ mixin GuestUserMixin {
   void navigateToLogin(BuildContext context) {
     Navigator.pushNamed(context, login);
   }
-} 
+}

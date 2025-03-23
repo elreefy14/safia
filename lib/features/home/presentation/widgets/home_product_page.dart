@@ -10,7 +10,7 @@ import 'package:safiaa/features/products/presentation/widgets/product_card.dart'
 class HomeProductListPage extends StatelessWidget {
   final Categories category;
 
-  HomeProductListPage({required this.category});
+  const HomeProductListPage({super.key, required this.category});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class HomeProductListPage extends StatelessWidget {
                     crossAxisCount: 2,
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
-                    childAspectRatio: 0.92,
+                    childAspectRatio: 0.7,
                   ),
                   itemCount: category.products!.length,
                   itemBuilder: (context, index) {

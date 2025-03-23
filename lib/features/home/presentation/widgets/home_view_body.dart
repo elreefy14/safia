@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shimmer/shimmer.dart'; // تم إضافتها هنا
 import 'package:safiaa/core/helpers/spacing.dart';
 import 'package:safiaa/core/recourses/color_manager/color_manager.dart';
 import 'package:safiaa/core/recourses/styles_manger/styles_manager.dart';
@@ -14,93 +13,97 @@ import 'package:safiaa/features/home/presentation/widgets/home_view_category_lis
 import 'package:safiaa/features/products/presentation/cubit/categories/categories_cubit.dart';
 import 'package:safiaa/features/products/presentation/cubit/categories/categories_state.dart';
 import 'package:safiaa/features/products/presentation/cubit/products/products_cubit.dart';
+import 'package:shimmer/shimmer.dart'; // تم إضافتها هنا
 
 class HomeViewBody extends StatelessWidget {
-  HomeViewBody({super.key});
+  const HomeViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       clipBehavior: Clip.none,
-      child: Column(
-        children: [
-          verticalSpace(16),
-          const CustomHomeAppBar(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                verticalSpace(16),
+      child: SafeArea(
+        child: Column(
+          children: [
+            verticalSpace(16),
+            const CustomHomeAppBar(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  verticalSpace(16),
 
-                /// 🔹 **عرض البنرات**
-                BlocBuilder<PannersCubit, PannersState>(
-                  builder: (context, state) {
-                    if (state is PannersError) {
-                      return SizedBox();
-                    } else if (state is PannersLoaded) {
-                      return CustomSlider(imagePaths: state.panners);
-                    } else {
-                      return buildShimmerBanner(); // ⬅️ **تم استبداله بـ Shimmer**
-                    }
-                  },
-                ),
-
-                verticalSpace(16),
-                Text(
-                  'قائمة الفئات',
-                  textAlign: TextAlign.start,
-                  style: getSemiBoldStyle(
-                    color: MyColors.black,
-                    fontSize: 18.sp,
+                  /// 🔹 **عرض البنرات**
+                  BlocBuilder<PannersCubit, PannersState>(
+                    builder: (context, state) {
+                      if (state is PannersError) {
+                        return const SizedBox();
+                      } else if (state is PannersLoaded) {
+                        return CustomSlider(imagePaths: state.panners);
+                      } else {
+                        return buildShimmerBanner(); // ⬅️ **تم استبداله بـ Shimmer**
+                      }
+                    },
                   ),
-                ),
-                verticalSpace(16),
 
-                /// 🔹 **عرض الفئات (Categories)**
-                BlocBuilder<CategoriesCubit, CategoriesState>(
-                  builder: (context, state) {
-                    if (state is CategoriesError) {
-                      return buildErrorBar(context, state.message);
-                    } else if (state is CategoriesLoaded) {
-                      return HomeCategoryListItem(
-                          categoriesList: state.categoriesList);
-                    } else {
-                      return buildShimmerCategories(); // ⬅️ **تم استبداله بـ Shimmer**
-                    }
-                  },
-                ),
-
-                verticalSpace(24),
-                Text(
-                  'المنتجات',
-                  textAlign: TextAlign.start,
-                  style: getSemiBoldStyle(
-                    color: MyColors.black,
-                    fontSize: 18.sp,
+                  verticalSpace(16),
+                  Text(
+                    'قائمة الفئات',
+                    textAlign: TextAlign.start,
+                    style: getSemiBoldStyle(
+                      color: MyColors.black,
+                      fontSize: 18.sp,
+                    ),
                   ),
-                ),
-                verticalSpace(16),
+                  verticalSpace(16),
 
-                /// 🔹 **عرض المنتجات**
-                BlocBuilder<ProductsCubit, ProductsState>(
-                  builder: (context, state) {
-                    if (state is ProductsError) {
-                      return Center(child: buildErrorBar(context, state.message));
-                    } else if (state is ProductsLoaded) {
-                      return AllProudctHomeList(product: state.products);
-                    } else if (state is ProductsAddedToCart) {
-                      context.read<ProductsCubit>().fetchProducts();
-                    }
+                  /// 🔹 **عرض الفئات (Categories)**
+                  BlocBuilder<CategoriesCubit, CategoriesState>(
+                    builder: (context, state) {
+                      if (state is CategoriesError) {
+                        return buildErrorBar(context, state.message);
+                      } else if (state is CategoriesLoaded) {
+                        return HomeCategoryListItem(
+                            categoriesList: state.categoriesList);
+                      } else {
+                        return buildShimmerCategories(); // ⬅️ **تم استبداله بـ Shimmer**
+                      }
+                    },
+                  ),
 
-                    return buildShimmerProducts(); // ⬅️ **تم استبداله بـ Shimmer**
-                  },
-                ),
-              ],
+                  verticalSpace(24),
+                  Text(
+                    'المنتجات',
+                    textAlign: TextAlign.start,
+                    style: getSemiBoldStyle(
+                      color: MyColors.black,
+                      fontSize: 18.sp,
+                    ),
+                  ),
+                  verticalSpace(16),
+
+                  /// 🔹 **عرض المنتجات**
+                  BlocBuilder<ProductsCubit, ProductsState>(
+                    builder: (context, state) {
+                      if (state is ProductsError) {
+                        return Center(
+                            child: buildErrorBar(context, state.message));
+                      } else if (state is ProductsLoaded) {
+                        return AllProudctHomeList(product: state.products);
+                      } else if (state is ProductsAddedToCart) {
+                        context.read<ProductsCubit>().fetchProducts();
+                      }
+
+                      return buildShimmerProducts(); // ⬅️ **تم استبداله بـ Shimmer**
+                    },
+                  ),
+                ],
+              ),
             ),
-          ),
-          verticalSpace(24),
-        ],
+            verticalSpace(24),
+          ],
+        ),
       ),
     );
   }
@@ -154,9 +157,9 @@ Widget buildShimmerCategories() {
 Widget buildShimmerProducts() {
   return GridView.builder(
     shrinkWrap: true,
-    physics: NeverScrollableScrollPhysics(),
+    physics: const NeverScrollableScrollPhysics(),
     itemCount: 6,
-    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
       crossAxisCount: 2,
       childAspectRatio: 0.7,
       crossAxisSpacing: 10,
@@ -180,8 +183,8 @@ Widget buildShimmerProducts() {
 /// 🔥 **واجهة الخطأ**
 Widget buildErrorBar(BuildContext context, String message) {
   return Container(
-    padding: EdgeInsets.all(8.0),
-    margin: EdgeInsets.symmetric(vertical: 8),
+    padding: const EdgeInsets.all(8.0),
+    margin: const EdgeInsets.symmetric(vertical: 8),
     decoration: BoxDecoration(
       color: Colors.red,
       borderRadius: BorderRadius.circular(8),

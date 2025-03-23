@@ -167,6 +167,11 @@ class ProfileViewBody extends StatelessWidget {
                       ),
                     ),
                     ProfileButton(
+                      icon: Icons.phone,
+                      title: 'تواصل معنا',
+                      onTap: () => Navigator.pushNamed(context, contactUs),
+                    ),
+                    ProfileButton(
                       icon: Icons.shopping_bag,
                       title: 'الطلبات الخاصة بي',
                       onTap: () => Navigator.pushNamed(context, allOrders),

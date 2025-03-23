@@ -18,6 +18,8 @@ const orderDetailsView = 'orderDetailsView';
 const productsDetails = 'productsDetails';
 // all order routes
 const allOrders = 'allOrders';
+//contact us routes
+const contactUs = 'contactUs';
 const ordersView = 'ordersView';
 
 const termAndCond = 'termAndCond';

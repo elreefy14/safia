@@ -40,10 +40,6 @@ dependencies:
   flutter_bloc: ^8.1.6
   flutter_intl: ^0.0.1
   flutter_localization: ^0.2.2
-  wave: ^0.2.2
-
-  smooth_page_indicator:
-
   flutter_screenutil: ^5.9.3
   flutter_svg: ^2.0.15
   fluttertoast: ^8.2.10
@@ -55,13 +51,16 @@ dependencies:
   pretty_dio_logger: ^1.4.0
   shared_preferences: ^2.3.3
   shimmer: ^3.0.0
+  smooth_page_indicator: null
   sms_autofill: ^2.4.1
+  url_launcher: ^6.3.1
+  wave: ^0.2.2
 
 dev_dependencies:
   flutter_launcher_icons: ^0.13.1
+  flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
 
 flutter_launcher_icons:
   android: "launcher_icon"

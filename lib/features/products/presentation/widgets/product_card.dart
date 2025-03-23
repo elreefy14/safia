@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:safiaa/core/helpers/extensions_route.dart';
+import 'package:safiaa/core/helpers/guest_user_mixin.dart';
 import 'package:safiaa/core/helpers/spacing.dart';
 import 'package:safiaa/core/recourses/color_manager/color_manager.dart';
 import 'package:safiaa/core/recourses/routes_manger/const.dart';
@@ -10,7 +11,7 @@ import 'package:safiaa/core/widgets/custom_botton.dart';
 import 'package:safiaa/features/products/data/models/categories.dart';
 import 'package:safiaa/features/products/presentation/cubit/products/products_cubit.dart';
 
-class ProductsCard extends StatelessWidget {
+class ProductsCard extends StatelessWidget with GuestUserMixin {
   const ProductsCard({
     super.key,
     required this.products,
@@ -25,7 +26,7 @@ class ProductsCard extends StatelessWidget {
       },
       child: Container(
         width: 200.w,
-        height: 260.h,
+        // height: 220.h,
         margin: EdgeInsets.only(right: 6.w),
         decoration: ShapeDecoration(
           color: Colors.white,
@@ -57,7 +58,7 @@ class ProductsCard extends StatelessWidget {
                 child: Image.network(
                   products.image!,
                   width: 200.w,
-                  height: 120.h,
+                  height: 110.h,
                   fit: BoxFit.fill,
                 ),
               ),
@@ -73,7 +74,7 @@ class ProductsCard extends StatelessWidget {
               ),
               verticalSpace(6),
               SizedBox(
-                height: 27.h,
+                height: 20.h,
                 child: Text(
                   products.description!,
                   textAlign: TextAlign.center,
@@ -81,21 +82,33 @@ class ProductsCard extends StatelessWidget {
                     color: MyColors.grayscale500,
                     fontSize: 10.sp,
                   ),
-                  maxLines: 2,
+                  maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              verticalSpace(9),
+              Text(
+                '${products.price} ريال',
+                style: getBoldStyle(
+                  color: MyColors.prime,
+                  fontSize: 14.sp,
+                ),
+              ),
+              verticalSpace(2),
               CustomBotton(
                 text: 'اضافة الى السلة',
                 height: 40.h,
                 width: 200.w,
                 fontSize: 10.sp,
-                onPressed: () {
-                  context.read<ProductsCubit>().addItemToCart(products.id!, 1);
-                },
+                onPressed: () => handleGuestAction(
+                  context,
+                  action: () {
+                    context
+                        .read<ProductsCubit>()
+                        .addItemToCart(products.id!, 1);
+                  },
+                  message: 'يجب تسجيل الدخول لإضافة المنتج إلى السلة',
+                ),
               ),
-              verticalSpace(6),
             ],
           ),
         ),

@@ -10,7 +10,7 @@ class AllProudctHomeList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 260.h,
+      height: 245.h,
       child: ListView.builder(
         clipBehavior: Clip.none,
         itemCount: product.length,

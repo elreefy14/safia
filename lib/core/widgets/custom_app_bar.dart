@@ -20,7 +20,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       title: Text(
         title ?? "تسجيل الدخول",
-        style: getBoldStyle(color: MyColors.black, fontSize: 20.sp),
+        style: getBoldStyle(color: MyColors.black, fontSize: fontSize ?? 20.sp),
       ),
       leading: IconButton(
         onPressed: onPressed ?? () => Navigator.pop(context),
@@ -41,7 +41,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             ],
           ),
           child: Padding(
-            padding: const EdgeInsets.all(3.0),
+            padding: const EdgeInsets.all(1.0),
             child: Icon(
               Icons.arrow_back_ios_new_rounded,
               color: MyColors.black,

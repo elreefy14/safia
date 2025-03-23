@@ -1,21 +1,17 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:safiaa/core/helpers/injection_container.dart' as di;
-import 'package:safiaa/core/recourses/color_manager/color_manager.dart';
-import 'package:safiaa/core/recourses/styles_manger/styles_manager.dart';
+import 'package:safiaa/core/widgets/custom_bottom_nav_bar.dart';
+import 'package:safiaa/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:safiaa/features/cart/presentation/pages/cart_view.dart';
 import 'package:safiaa/features/home/domain/repositories/panners_repo.dart';
 import 'package:safiaa/features/home/presentation/cubits/cubit/panners_cubit.dart';
+import 'package:safiaa/features/home/presentation/widgets/guest_user_home_body.dart';
 import 'package:safiaa/features/home/presentation/widgets/home_view_body.dart';
 import 'package:safiaa/features/products/domain/repositories/categories_rep.dart';
 import 'package:safiaa/features/products/presentation/cubit/categories/categories_cubit.dart';
 import 'package:safiaa/features/products/presentation/cubit/products/products_cubit.dart';
 import 'package:safiaa/features/profile/presentation/pages/profile_view.dart';
-import 'package:safiaa/features/auth/presentation/cubit/auth_cubit.dart';
-import 'package:safiaa/features/home/presentation/widgets/guest_user_home_body.dart';
-import 'package:safiaa/core/widgets/custom_bottom_nav_bar.dart';
 
 import '../../../../core/recourses/routes_manger/const.dart';
 
@@ -35,7 +31,7 @@ class _HomeViewState extends State<HomeView> {
 
   List<Widget> widgetPage = [
     HomeViewBody(),
-    CartView(),
+    const CartView(),
     const ProfileView(),
   ];
 
@@ -70,13 +66,16 @@ class _HomeViewState extends State<HomeView> {
           return MultiBlocProvider(
             providers: [
               BlocProvider(
-                create: (context) => PannersCubit(di.sl<PannerRepository>())..fetchBanners(),
+                create: (context) =>
+                    PannersCubit(di.sl<PannerRepository>())..fetchBanners(),
               ),
               BlocProvider(
-                create: (context) => CategoriesCubit(di.sl<CategoriesRep>())..fetchCategories(),
+                create: (context) =>
+                    CategoriesCubit(di.sl<CategoriesRep>())..fetchCategories(),
               ),
               BlocProvider(
-                create: (context) => ProductsCubit(di.sl<CategoriesRep>())..fetchProducts(),
+                create: (context) =>
+                    ProductsCubit(di.sl<CategoriesRep>())..fetchProducts(),
               ),
             ],
             child: Scaffold(
@@ -94,7 +93,7 @@ class _HomeViewState extends State<HomeView> {
             ),
           );
         }
-        
+
         // Show loading or initial state
         return const Scaffold(
           body: Center(
